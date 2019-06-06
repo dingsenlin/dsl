@@ -1,0 +1,8 @@
+div.container{
+    margin: 0 auto;
+    width: 1100px;
+    background-color: #6a737d;
+}
+div.container img{
+    margin-left: 38px;
+}

@@ -3,6 +3,6 @@ from .views import index,list,detail
 app_name = "booktest"
 urlpatterns=[
     url(r'^$',index,name='index'),
-    url(r'^list/$',list,name='list'),
-    url(r'^detail/(\d+)/$',detail,name='detail')
+    url(r'^cjc/list/$',list,name='list'),
+    url(r'^ggz/detail/(\d+)/$',detail,name='detail')
 ]
