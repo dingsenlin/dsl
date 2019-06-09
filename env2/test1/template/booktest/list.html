@@ -10,7 +10,7 @@
     <h2>这里是列表页</h2>
     <ul>
         {% for b in books %}
-        <li><a href="{% url 'booktest:detail' b.id %}">{{ b.title }}</a></li>
+        <li><a href="{% url 'booktest:detail' b.id %}">{{ b.title }}</a><a href="{% url 'booktest:deletebook' b.id %}">删除</a></li>
         {% endfor %}
     </ul>
     <a href="{% url 'booktest:index' %}">返回首页</a>

@@ -9,9 +9,11 @@
 <div class="container">
     <h2>{{ book.id }}</h2>
     {% for b in book.heroinfo_set.all %}
-    <li>{{ b.name }}</li>
-    {% endfor %}
+    <li>{{ b.name }}<a href="{% url 'booktest:deletehero' b.id %}">删除</a></li>
 
+    {% endfor %}
+    <a href="{% url 'booktest:addhero' book.id %}">添加角色</a>
+    <br>
     <a href="{% url 'booktest:list'%}">返回列表页</a>
 
 </div>
