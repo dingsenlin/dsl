@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,reverse,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from .models import BookInfo,HeroInfo
@@ -49,3 +49,17 @@ def addhero(req,id):
         hero.book = book
         hero.save()
         return HttpResponseRedirect("/detail/%s/"%(id,))
+
+def addbook(req):
+    # book = BookInfo.objects.get(pk=id)
+    # return HttpResponse("添加成功")
+    if req.method == "GET":
+        return render(req,"booktest/addbook.html")
+    elif req.method == "POST":
+        book = BookInfo()
+        book.title = req.POST.get("title")
+        book.pub_date = req.POST.get("pub_date")
+    #     hero.book = book
+        book.save()
+        # return redirect(reverse(" booktest:list "))
+        return HttpResponseRedirect("/list/")
