@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果页</title>
+</head>
+<body>
+    {{ vote.title }}
+    {% for a in vote2 %}<br>
+        {{ a.name }}:{{ a.option }}<br>
+    {% endfor %}
+</body>
+</html>
