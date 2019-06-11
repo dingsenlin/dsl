@@ -8,13 +8,17 @@
     <h2>{{ vote.id }}</h2>
 
     <li>
-    <form action="/detail/{{ vote.id }}/" method="post">
+    <form action="{% url 'booktest:detail' vote.id %}" method="post">
         {% for v in vote.voteinfo2_set.all %}
+        {% if forloop.counter == 1 %}
+            <input type="radio" checked value="{{ v.name }}" name="ppt">{{ v.name }}<br>
+        {% else %}
             <input type="radio" value="{{ v.name }}" name="ppt">{{ v.name }}
-
         <br>
+        {% endif %}
         {% endfor %}
-        <input type="submit" value="投票" >
+        <input type="submit" value="投票" ><br>
+
     </form>
     </li>
 

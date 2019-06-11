@@ -5,9 +5,11 @@
     <title>结果页</title>
 </head>
 <body>
-    {{ vote.title }}
+
+    <h1>{{ vote.title }}</h1><br>投票结果:
     {% for a in vote2 %}<br>
-        {{ a.name }}:{{ a.option }}<br>
-    {% endfor %}
+        {{ a.name }}---->{{ a.option }}<br>
+    {% endfor %}<br>
+    <a href="{% url 'booktest:list' %}" style="text-decoration:none">点击进入投票页</a>
 </body>
 </html>

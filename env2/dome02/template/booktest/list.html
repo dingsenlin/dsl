@@ -8,10 +8,10 @@
     <h2>请选择问题进行投票</h2>
     <ul>
         {% for v in vote1 %}
-        <li ><a href="/detail/{{ v.id }}/"  style="text-decoration:none">{{ v.title }}</a></li>
+        <li ><a href="{% url 'booktest:detail' v.id %}"  style="text-decoration:none">{{ v.title }}</a></li>
         {% endfor %}
     </ul>
-    <a href="/" style="text-decoration:none">返回投票首页</a>
+    <a href="{% url 'booktest:index' %}" style="text-decoration:none">返回投票首页</a>
 
 </body>
 </html>
