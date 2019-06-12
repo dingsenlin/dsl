@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect,reverse
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
 from .models import VoteInfo1,VoteInfo2
 from django.views.generic import View
+from .forms import LoginForm
+
 # Create your views here.
 #装饰器
 def checklogin(fun):
@@ -46,17 +48,32 @@ def result(req, id):
 
 
 def login(req):
-    if req.method == "GET":
-        return render(req,"booktest/login.html")
 
+    if req.method == "GET":
+        # lf = LoginForm()
+        #
+        # return render(req,"booktest/login.html",locals())
+        pass
+
+    elif req.method == "POST":
+        # username = req.POST.get("username")
+        # pwd = req.POST.get("password")
+        # # print(username,pwd)
+        # # cookie实在response里设置
+        # # res = redirect(reverse("booktest:index"))
+        # # res.set_cookie("username",username)
+        # # return res
+        # #session  在request里面设置
+        # req.session["username"] = username
+        # lf = LoginForm(req.POST)
+        # print(lf.is_valid())
+        # return redirect(reverse("booktest:index"))
+        pass
+def regist(req):
+    if req.method == "GET":
+        return render(req, "booktest/regist.html")
     elif req.method == "POST":
         username = req.POST.get("username")
         pwd = req.POST.get("password")
-        print(username,pwd)
-        # cookie实在response里设置
-        # res = redirect(reverse("booktest:index"))
-        # res.set_cookie("username",username)
-        # return res
-        #session  在request里面设置
         req.session["username"] = username
         return redirect(reverse("booktest:index"))

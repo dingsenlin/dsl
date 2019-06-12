@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>详情页</title>
-</head>
-<body>
-    <h2>{{ vote.id }}</h2>
+{% extends 'booktest/base.html' %}
+{% block title %}
+详情页
+{% endblock %}
+{% block body %}
+      <h2>{{ vote.id }}</h2>
 
     <li>
     <form action="{% url 'booktest:detail' vote.id %}" method="post">
+
+        {% csrf_token %}
+
         {% for v in vote.voteinfo2_set.all %}
         {% if forloop.counter == 1 %}
             <input type="radio" checked value="{{ v.name }}" name="ppt">{{ v.name }}<br>
@@ -27,5 +28,4 @@
 
     <a href="/list/" style="text-decoration:none">返回列表页</a>
 
-</body>
-</html>
+{% endblock %}

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>投票列表</title>
-</head>
-<body>
+{% extends 'booktest/base.html' %}
+{% block title %}
+投票列表
+{% endblock %}
+{% block body %}
     <h2>请选择问题进行投票</h2>
     <ul>
         {% for v in vote1 %}
@@ -13,5 +11,4 @@
     </ul>
     <a href="{% url 'booktest:index' %}" style="text-decoration:none">返回投票首页</a>
 
-</body>
-</html>
+{% endblock %}

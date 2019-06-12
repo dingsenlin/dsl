@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>结果页</title>
-</head>
-<body>
+{% extends 'booktest/base.html' %}
+{% block title %}
+投票结果页面
+{% endblock %}
 
+{% block body %}
     <h1>{{ vote.title }}</h1><br>投票结果:
     {% for a in vote2 %}<br>
         {{ a.name }}---->{{ a.option }}<br>
     {% endfor %}<br>
     <a href="{% url 'booktest:list' %}" style="text-decoration:none">点击进入投票页</a>
-</body>
-</html>
+
+{% endblock %}
