@@ -1,0 +1,38 @@
+{% extends 'booktest/base.html' %}
+{% block title %}
+登录页面
+{% endblock %}
+
+
+{% block body %}
+
+<div>
+    <h3>{{ errormessage }}</h3>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab"
+                                                  data-toggle="tab">登录</a></li>
+        <li role="presentation"><a href="#regist" aria-controls="regist" role="tab" data-toggle="tab">注册</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="login">
+            <form action="{% url 'booktest:login' %}" method="post"></form>
+            <form>
+                {{ lf }}
+                <button type="submit" class="btn btn-default">登录</button>
+            </form>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="regist">
+            <form action="{% url 'booktest:regist' %}" method="post"></form>
+            {% csrf_token %}
+            {{ rf }}
+            <input type="submit" value="注册">
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

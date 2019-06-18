@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
-from .models import VoteInfo1,VoteInfo2
+from .models import VoteInfo1,VoteInfo2,MyUser
 from django.views.generic import View
-from .forms import LoginForm
+from .forms import MyUserLoginForm,MyUserRegistForm
+
 
 # Create your views here.
 #装饰器
@@ -52,8 +53,10 @@ def login(req):
     if req.method == "GET":
         # lf = LoginForm()
         #
-        # return render(req,"booktest/login.html",locals())
-        pass
+        # return render(req,"booktest/login_regist.html",locals())
+        lf =MyUserLoginForm()
+        rf = MyUserRegistForm()
+        return render(req,"booktest/login_regist.html",locals())
 
     elif req.method == "POST":
         # username = req.POST.get("username")
@@ -71,9 +74,26 @@ def login(req):
         pass
 def regist(req):
     if req.method == "GET":
-        return render(req, "booktest/regist.html")
+        # return render(req, "booktest/regist.html")
+        pass
+
     elif req.method == "POST":
-        username = req.POST.get("username")
-        pwd = req.POST.get("password")
-        req.session["username"] = username
-        return redirect(reverse("booktest:index"))
+        # username = req.POST.get("username")
+        # pwd = req.POST.get("password")
+        # req.session["username"] = username
+        # return redirect(reverse("booktest:index"))
+
+        # rf = MyUserRegistForm(req.POST)
+        # rf.save()
+        try:
+            username = req.POST.get("username")
+            password = req.POST.get("password")
+            eamil = req.POST.get("email")
+            user = MyUser.objects.create_user(username=username,password=password,email=eamil)
+            if user:
+                return redirect(reverse("booktest:login"))
+        except:
+            lf = MyUserLoginForm()
+            rf = MyUserRegistForm()
+            errormessage ="注册失败"
+            return render(req, "booktest/login_regist.html",locals())
