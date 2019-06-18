@@ -23,3 +23,11 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Ads(models.Model):
+    pic = models.ImageField(upload_to="ads")
+    desc = models.CharField(max_length=20)
+    url = models.CharField(max_length=20)
+    def __str__(self):
+        return self.desc

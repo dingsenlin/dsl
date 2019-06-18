@@ -5,6 +5,7 @@ from comments.forms import CommentForm
 from comments.models import Comment
 from django.core.paginator import Paginator
 import markdown
+from django.views.decorators.cache import cache_page
 from django.http import HttpResponse
 # Create your views here.
 
@@ -23,6 +24,15 @@ class IndexView(View):
         pagennum = 1 if pagennum == None else pagennum
         page = paginator.get_page(pagennum)
         return render(req,"blog/index.html",locals())
+@cache_page(60*5)
+def index(req):
+    articles = Article.objects.all()
+    paginator = Paginator(articles, 2)
+    pagennum = req.GET.get("page")
+    pagennum = 1 if pagennum == None else pagennum
+    page = paginator.get_page(pagennum)
+    return render(req, "blog/index.html", locals())
+
 
 class SingleView(View):
     def get(self,req,id):
@@ -94,3 +104,7 @@ class TagView(View):
         pagenum = 1 if pagenum == None else pagenum
         page.path = "/tags/%s" % (id,)
         return render(req, "blog/index.html", locals())
+
+class ContactView(View):
+    def get(self,req):
+        return render(req,"blog/contact.html")

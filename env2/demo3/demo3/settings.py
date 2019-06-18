@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'comments'
+    'comments',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,25 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,"static/media")
+
+#配置redis
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.cache.RedisCache",
+        "LOCATION": "localhost:6379",
+        'TIMEOUT': 300,
+    },
+}
+
+HAYSTACK_CONNECTIONS = {
+'default': {
+'ENGINE': 'blog.whoosh_cn_backend.WhooshEngine',
+'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+}
+}
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
